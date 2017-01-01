@@ -14,6 +14,7 @@
 		9E9F19F11DF8090800EA89AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9F19EF1DF8090800EA89AC /* LaunchScreen.storyboard */; };
 		9E9F19FC1DF8090900EA89AC /* PopViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F19FB1DF8090900EA89AC /* PopViewTests.swift */; };
 		9E9F1A071DF8090900EA89AC /* PopViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F1A061DF8090900EA89AC /* PopViewUITests.swift */; };
+		9E9F1A151DF809B100EA89AC /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F1A141DF809B100EA89AC /* PopView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		9E9F1A021DF8090900EA89AC /* PopViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9F1A061DF8090900EA89AC /* PopViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewUITests.swift; sourceTree = "<group>"; };
 		9E9F1A081DF8090900EA89AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E9F1A141DF809B100EA89AC /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				9E9F19E61DF8090800EA89AC /* AppDelegate.swift */,
 				9E9F19E81DF8090800EA89AC /* ViewController.swift */,
 				9E9F19EA1DF8090800EA89AC /* Main.storyboard */,
+				9E9F1A141DF809B100EA89AC /* PopView.swift */,
 				9E9F19ED1DF8090800EA89AC /* Assets.xcassets */,
 				9E9F19EF1DF8090800EA89AC /* LaunchScreen.storyboard */,
 				9E9F19F21DF8090800EA89AC /* Info.plist */,
@@ -193,6 +196,7 @@
 				TargetAttributes = {
 					9E9F19E21DF8090800EA89AC = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = FZFRKGPX25;
 						ProvisioningStyle = Automatic;
 					};
 					9E9F19F61DF8090900EA89AC = {
@@ -260,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E9F19E91DF8090800EA89AC /* ViewController.swift in Sources */,
+				9E9F1A151DF809B100EA89AC /* PopView.swift in Sources */,
 				9E9F19E71DF8090800EA89AC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FZFRKGPX25;
 				INFOPLIST_FILE = PopView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Hiso3D.PopView;
@@ -422,6 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FZFRKGPX25;
 				INFOPLIST_FILE = PopView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Hiso3D.PopView;
@@ -503,6 +510,7 @@
 				9E9F1A0D1DF8090900EA89AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E9F1A0E1DF8090900EA89AC /* Build configuration list for PBXNativeTarget "PopViewTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +519,7 @@
 				9E9F1A101DF8090900EA89AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E9F1A111DF8090900EA89AC /* Build configuration list for PBXNativeTarget "PopViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +528,7 @@
 				9E9F1A131DF8090900EA89AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
