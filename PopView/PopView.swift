@@ -206,11 +206,16 @@ public class PopView: UIView {
         
         let popV : UIView = {
             
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.viewWidth/1.5, height: self.viewHeight/9))
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.viewWidth/1.5, height: self.viewHeight/15))
             
             if buttonstitles.count == 2 {
                 
                 view.frame.size.height = view.frame.size.height + heightOfLabelView
+                
+            }else{
+            
+                let buttonsHeights = Int(self.viewHeight/16) * buttonstitles.count
+                view.frame.size.height = view.frame.size.height + heightOfLabelView + CGFloat(buttonsHeights)
                 
             }
             
@@ -229,7 +234,8 @@ public class PopView: UIView {
         
         let labele : UILabel = {
             
-            let label = UILabel(frame: CGRect(x: 0, y:0, width: popV.frame.width - 6 , height: heightOfLabelView))
+            let label = UILabel(frame: CGRect(x: 0, y:5, width: popV.frame.width , height: heightOfLabelView))
+            
             if buttonstitles.count == 2 {
                 
                 label.center.x = popV.frame.width / 2
@@ -260,7 +266,7 @@ public class PopView: UIView {
             
             let detailLabel : UILabel = {
                 
-                let label = UILabel(frame: CGRect(x: 0, y:0, width: popV.frame.width - 6 , height: heightOFDetailLabel))
+                let label = UILabel(frame: CGRect(x: 0, y: labele.bounds.height + 5, width: popV.frame.width, height: heightOFDetailLabel))
                 if buttonstitles.count == 2 {
                     
                     label.center.x = popV.frame.width / 2
@@ -322,6 +328,25 @@ public class PopView: UIView {
             popV.addSubview(buttonRight)
             
             buttons = buttonss
+        }else{
+        
+            buttons = buttonss
+            let count = buttonss.count
+            for i in 1...count {
+            
+                print(i)
+                print(buttonss.count)
+                let cgFloati = CGFloat(i)
+                let button = buttonss[i-1]
+                button.frame = CGRect(x: 0, y: popV.frame.height - ( cgFloati * self.viewHeight/16), width: (popv?.frame.width)!, height: self.viewHeight/16)
+                button.tag = i
+                button.addTarget(self, action: #selector(self.PressedButton(sender:)), for: .touchUpInside)
+                popV.addSubview(button)
+                
+                
+                
+            }
+            
         }
         
         self.addSubview(popV)
