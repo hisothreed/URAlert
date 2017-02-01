@@ -26,16 +26,25 @@ class ViewController: UIViewController , popVAlertDelegate {
     
     func didPressButton(alert: PopView, AtIndexpath indexPath: Int) {
         
-        alert.dismiss(withAnimation: .fadeOut)
+        print(indexPath)
         
     }
     
     @IBAction func showAlert(sender: AnyObject) {
     
-        let vie = PopView(title: "hellllllooooooo wooooorrrrrllllld",description: "hello description", type: .done, withButtonsWithTitles: ["hello1" , "hello2","hello3"], delegate: self)
+        let vie = PopView(title: "hellllllooooooo wooooorrrrrllllld",description: "hello description", type: .done, withButtonsWithTitles: ["hello1" , "hello2","hello3"],withTextfields: ["hello1","hello2"], delegate: self)
+
+   
         
         vie.show(animation: .fadeIn)
 
+    }
+    
+    func didPressButtonWithFields(aler: PopView, fieldsArray: [UITextField], buttonAtIndex indexPath: Int) {
+        
+        print(indexPath)
+        print(fieldsArray[1].text)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

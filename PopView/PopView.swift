@@ -19,6 +19,7 @@ public class PopView: UIView {
     private var viewWidth = UIScreen.main.bounds.width
     private var alertHeight : CGFloat?
     private var alertWidth : CGFloat?
+    private var fields = [UITextField]()
     private weak var delegate: popVAlertDelegate?
     
     private var buttons : [UIButton?]!
@@ -70,7 +71,14 @@ public class PopView: UIView {
         
     }
     
-    
+    public init(title: String,description: String?,type: types, withButtonsWithTitles : [String],withTextfields: [String],delegate: popVAlertDelegate){
+        super.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
+        self.center.x = viewWidth/2
+        self.center.y = viewHeight/2
+       
+        self.initalizeWithButtonsAndTextfields(title: title, description: description, type: type, buttonstitles: withButtonsWithTitles, textFields: withTextfields, delegate: delegate)
+        
+    }
     
     ///// Set-Ups
     
@@ -354,7 +362,191 @@ public class PopView: UIView {
         
     }
 
-    
+    private func initalizeWithButtonsAndTextfields(title: String,description: String?,type: types, buttonstitles : [String],textFields: [String],delegate: popVAlertDelegate){
+        
+        setUpBlurView()
+        
+        self.delegate = delegate
+        
+        let heightOfLabelView = heightForView(text: title)
+        
+        let heightOFDetailLabel = heightForView(text: description!)
+        
+        let popV : UIView = {
+            
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.viewWidth/1.5, height: self.viewHeight/15))
+            
+            if textFields != nil {
+            
+                let fieldsHeights = Int(self.viewHeight/18) * textFields.count
+                view.frame.size.height = view.frame.size.height + CGFloat(fieldsHeights)
+                
+            }
+            
+            if buttonstitles.count == 2 {
+                
+                view.frame.size.height = view.frame.size.height + heightOfLabelView
+                
+            }else{
+                
+                let buttonsHeights = Int(self.viewHeight/16) * buttonstitles.count
+                view.frame.size.height = view.frame.size.height + heightOfLabelView + CGFloat(buttonsHeights)
+                
+            }
+            
+            view.center = self.center
+            view.backgroundColor = UIColor.white
+            view.layer.cornerRadius = 0
+            view.layer.masksToBounds = true
+            view.clipsToBounds = false
+            
+            return view
+        }()
+        
+        popv = popV
+        
+        
+        
+        let labele : UILabel = {
+            
+            let label = UILabel(frame: CGRect(x: 0, y:5, width: popV.frame.width , height: heightOfLabelView))
+            
+            if buttonstitles.count == 2 {
+                
+                label.center.x = popV.frame.width / 2
+                label.center.y = 20
+                
+                
+            }
+            
+            
+            
+            let font = UIFont(name: "Avenir Next", size: 20.0)
+            label.font = font
+            label.lineBreakMode = NSLineBreakMode.byWordWrapping
+            label.numberOfLines = 0
+            label.text = title
+            label.textColor = UIColor.black
+            label.textAlignment = NSTextAlignment.center
+            
+            return label
+        }()
+        
+        popV.addSubview(labele)
+        
+        if description != nil {
+            
+            
+            
+            let detailLabel : UILabel = {
+                
+                let label = UILabel(frame: CGRect(x: 0, y: labele.bounds.height + 5, width: popV.frame.width, height: heightOFDetailLabel))
+                if buttonstitles.count == 2 {
+                    
+                    label.center.x = popV.frame.width / 2
+                    label.center.y = heightOFDetailLabel + 10
+                    
+                }
+                
+                
+                let font = UIFont(name: "Avenir Next", size: 15.0)
+                label.font = font
+                label.lineBreakMode = NSLineBreakMode.byWordWrapping
+                label.numberOfLines = 0
+                label.text = description
+                label.textColor = UIColor.darkGray
+                label.textAlignment = NSTextAlignment.center
+                
+                return label
+                
+            }()
+            popV.frame.size.height = popV.frame.size.height + heightOFDetailLabel
+            popV.addSubview(detailLabel)
+            
+            
+        }
+        
+        
+        for (index,value) in textFields.enumerated() {
+            
+            let textField = UITextField()
+            textField.placeholder = value
+            textField.tag = index
+            let indexforYaxis = CGFloat(index) + 1.0
+            let detailLabelBottom = heightOfLabelView + heightOFDetailLabel
+            let heightOfField = self.viewHeight/18
+            textField.frame = CGRect(x: 0, y: detailLabelBottom + (heightOfField * indexforYaxis), width: (popv?.frame.width)!, height: self.viewHeight/18)
+            
+            textField.borderStyle = .roundedRect
+            popv?.addSubview(textField)
+            self.fields.append(textField)
+            
+        }
+        
+        var buttonss = [UIButton]()
+        
+        for button in buttonstitles {
+            
+            let but = UIButton()
+            but.setTitle(button, for: UIControlState.normal)
+            but.setTitleColor(UIColor.blue, for: UIControlState.normal)
+            but.layer.cornerRadius = 0
+            but.layer.borderWidth = 0.5
+            but.layer.borderColor = UIColor.lightGray.cgColor
+            buttonss.append(but)
+        }
+        
+        if (buttonss.count) == 2 {
+            
+            let buttonleft = buttonss[0]
+            let buttonRight = buttonss[1]
+            
+            
+            buttonleft.frame = CGRect(x: 0, y: popV.frame.height - self.viewHeight/16, width: (popv?.frame.width)!/2, height: self.viewHeight/16)
+            
+            buttonleft.tag = 0
+            
+            buttonleft.addTarget(self, action: #selector(self.PressedButton(sender:)), for: UIControlEvents.touchUpInside)
+            
+            popV.addSubview(buttonleft)
+            
+            
+            buttonRight.frame = CGRect(x: (buttonleft.frame.width), y: popV.frame.height - self.viewHeight/16, width: (popv?.frame.width)!/2, height: self.viewHeight/16)
+            buttonRight.tag = 1
+            buttonRight.addTarget(self, action: #selector(self.PressedButton(sender:)), for: UIControlEvents.touchUpInside)
+            
+            
+            popV.addSubview(buttonRight)
+            
+            buttons = buttonss
+        }else{
+            
+            buttons = buttonss
+            let count = buttonss.count
+            for i in 1...count {
+                
+                print(i)
+                print(buttonss.count)
+                let cgFloati = CGFloat(i)
+                let button = buttonss[i-1]
+                button.frame = CGRect(x: 0, y: popV.frame.height - ( cgFloati * self.viewHeight/16), width: (popv?.frame.width)!, height: self.viewHeight/16)
+                button.tag = i
+                button.addTarget(self, action: #selector(self.pressedButtonWithFieldsArray(sender:)), for: .touchUpInside)
+                popV.addSubview(button)
+                
+                
+                
+            }
+            
+        }
+        
+        
+        
+        self.addSubview(popV)
+        
+        
+    }
+
     
     /////// Methods
     
@@ -392,6 +584,12 @@ public class PopView: UIView {
         
     }
     
+    
+    func pressedButtonWithFieldsArray(sender: UIButton) {
+    
+        delegate?.didPressButtonWithFields!(aler: self, fieldsArray: fields, buttonAtIndex: sender.tag)
+        
+    }
     
     func PressedButton(sender: UIButton) {
     
@@ -453,6 +651,7 @@ public class PopView: UIView {
 @objc public protocol popVAlertDelegate : NSObjectProtocol {
      @objc optional func didPressButton(alert: PopView,AtIndexpath indexPath : Int)
      @objc optional func willPressBackView(alert: PopView)
+     @objc optional func didPressButtonWithFields(aler: PopView,fieldsArray: [UITextField],buttonAtIndex indexPath: Int)
 }
 
 
