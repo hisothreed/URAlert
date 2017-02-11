@@ -36,6 +36,8 @@ public class PopView: UIView {
        case warning 
        case error
        case done
+       case form
+       case notice
         
     }
     
